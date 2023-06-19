@@ -32,11 +32,6 @@ const (
 	// capped in size and thus this number should be seen as a soft max
 	MaxHeaderBytes int64 = 626
 
-	// 🏺 Note that this value is the encoded size of the ProtocolBuffer. See TestMaxEntropyBytes() for how Tendermint
-	//  calculates this value. Add/remove Ostracon-specific field sizes to/from this heuristically determined constant.
-	MaxEntropyBytes int64 = (1 + 5) + // +Round
-		(2 + int64(vrf.ProofSize)) // +Proof
-
 	// MaxOverheadForBlock - maximum overhead to encode a block (up to
 	// MaxBlockSizeBytes in size) not including it's parts except Data.
 	// This means it also excludes the overhead for individual transactions.
@@ -46,6 +41,13 @@ const (
 	// Uvarint length of Data.Txs:          4 bytes
 	// Data.Txs field:                      1 byte
 	MaxOverheadForBlock int64 = 11
+)
+
+var (
+	// 🏺 Note that this value is the encoded size of the ProtocolBuffer. See TestMaxEntropyBytes() for how Tendermint
+	//  calculates this value. Add/remove Ostracon-specific field sizes to/from this heuristically determined constant.
+	MaxEntropyBytes int64 = (1 + 5) + // +Round
+		(2 + int64(vrf.DefaultVrf.ProofSize())) // +Proof
 )
 
 // Block defines the atomic unit of an Ostracon blockchain.

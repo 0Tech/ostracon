@@ -5,13 +5,8 @@ OUTPUT?=build/ostracon
 INCLUDE = -I=${GOPATH}/src/github.com/Finschia/ostracon -I=${GOPATH}/src -I=${GOPATH}/src/github.com/gogo/protobuf/protobuf
 BUILD_TAGS ?= ostracon
 VERSION := $(shell git describe --always)
-ifeq ($(LIBSODIUM), 1)
-  BUILD_TAGS += libsodium
-  LIBSODIUM_TARGET = libsodium
-else
-  BUILD_TAGS += r2ishiguro
-  LIBSODIUM_TARGET =
-endif
+BUILD_TAGS += libsodium
+LIBSODIUM_TARGET = libsodium
 LD_FLAGS = -X github.com/Finschia/ostracon/version.OCCoreSemVer=$(VERSION)
 BUILD_FLAGS = -mod=readonly -ldflags "$(LD_FLAGS)"
 HTTPS_GIT := https://github.com/Finschia/ostracon.git

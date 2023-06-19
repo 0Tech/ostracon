@@ -15,13 +15,8 @@ type vrfEd25519libsodium struct {
 }
 
 func init() {
-	defaultVrf = newVrfEd25519libsodium()
+	DefaultVrf = newVrfEd25519libsodium()
 }
-
-const (
-	ProofSize  int = int(libsodium.PROOFBYTES)
-	OutputSize int = int(libsodium.OUTPUTBYTES)
-)
 
 func newVrfEd25519libsodium() vrfEd25519libsodium {
 	return vrfEd25519libsodium{}
@@ -75,4 +70,12 @@ func newOutput(bytes *[libsodium.OUTPUTBYTES]byte) Output {
 	output := make([]byte, libsodium.OUTPUTBYTES)
 	copy(output[:], bytes[:])
 	return output
+}
+
+func (base vrfEd25519libsodium) ProofSize() int {
+	return int(libsodium.PROOFBYTES)
+}
+
+func (base vrfEd25519libsodium) OutputSize() int {
+	return int(libsodium.OUTPUTBYTES)
 }

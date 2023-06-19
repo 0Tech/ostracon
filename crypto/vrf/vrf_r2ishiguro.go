@@ -1,6 +1,3 @@
-//go:build !libsodium && !coniks
-// +build !libsodium,!coniks
-
 package vrf
 
 import (
@@ -13,16 +10,8 @@ type vrfEd25519r2ishiguro struct {
 }
 
 func init() {
-	// if you use build option for other implementation, defaultVrf is overridden by other implementation.
-	if defaultVrf == nil {
-		defaultVrf = newVrfEd25519r2ishiguro()
-	}
+	OldVrf = newVrfEd25519r2ishiguro()
 }
-
-const (
-	ProofSize  int = 81
-	OutputSize int = 32
-)
 
 func newVrfEd25519r2ishiguro() vrfEd25519r2ishiguro {
 	return vrfEd25519r2ishiguro{}
@@ -44,4 +33,12 @@ func (base vrfEd25519r2ishiguro) ProofToHash(proof Proof) (Output, error) {
 		return nil, err
 	}
 	return r2ishiguro.ECVRF_proof2hash(proof), nil
+}
+
+func (base vrfEd25519r2ishiguro) ProofSize() int {
+	return 81
+}
+
+func (base vrfEd25519r2ishiguro) OutputSize() int {
+	return 32
 }

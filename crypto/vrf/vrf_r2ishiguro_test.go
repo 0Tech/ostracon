@@ -1,6 +1,3 @@
-//go:build !libsodium && !coniks
-// +build !libsodium,!coniks
-
 package vrf
 
 import (
