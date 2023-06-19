@@ -32,19 +32,19 @@ func (op Output) ToInt() *big.Int {
 	return &i
 }
 
+var sealed bool = false
 func Prove(privateKey []byte, message []byte) (Proof, error) {
+	sealed = true
 	return DefaultVrf.Prove(privateKey, message)
 }
 
-var sealed = false
 func Verify(publicKey []byte, proof Proof, message []byte) (bool, error) {
 	switch proofSize := len(proof); proofSize {
 	case DefaultVrf.ProofSize():
-		sealed = true
 		return DefaultVrf.Verify(publicKey, proof, message)
 	case OldVrf.ProofSize():
 		if sealed {
-			return false, fmt.Errorf("Invalid vrf proof size: %d", proofSize)
+			return false, fmt.Errorf("r2ishiguro has been sealed", proofSize)
 		}
 		return OldVrf.Verify(publicKey, proof, message)
 	default:
