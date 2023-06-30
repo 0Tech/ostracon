@@ -7,11 +7,13 @@ import (
 	"fmt"
 	"io"
 
+	"github.com/oasisprotocol/curve25519-voi/primitives/ed25519"
+	vrf "github.com/oasisprotocol/curve25519-voi/primitives/ed25519/extra/ecvrf"
+
 	"github.com/Finschia/ostracon/crypto"
 	"github.com/Finschia/ostracon/crypto/tmhash"
 	tmjson "github.com/Finschia/ostracon/libs/json"
-	"github.com/oasisprotocol/curve25519-voi/primitives/ed25519"
-	vrf "github.com/oasisprotocol/curve25519-voi/primitives/ed25519/extra/ecvrf"
+	legacyvrf "github.com/Finschia/ostracon/crypto/legacy/vrf"
 )
 
 //-------------------------------------
@@ -175,6 +177,16 @@ func (pubKey PubKey) Type() string {
 // See sections 3.1 and 3.2 here https://datatracker.ietf.org/doc/draft-irtf-cfrg-vrf/.
 func (pubKey PubKey) VRFVerify(proof []byte, message []byte) (crypto.Output, error) {
 	isValid, hash := vrf.Verify(ed25519.PublicKey(pubKey), proof, message)
+
+	// support legacy r2ishiguro
+	if isValid {
+		// seal the legacy
+		legacyvrf.Seal()
+	} else {
+		// try legacy if failed
+		isValid, hash = legacyvrf.Verify(pubKey, proof, message)
+	}
+
 	if !isValid {
 		return nil, fmt.Errorf("either Public Key or Proof is an invalid value.: err: %s",
 			hex.EncodeToString(proof))
