@@ -19,6 +19,7 @@ require (
 	github.com/google/orderedcode v0.0.1
 	github.com/gorilla/websocket v1.5.0
 	github.com/gtank/merlin v0.1.1
+	github.com/hdevalence/ed25519consensus v0.1.0
 	github.com/lib/pq v1.10.9
 	github.com/libp2p/go-buffer-pool v0.1.0
 	github.com/miekg/dns v1.1.55
@@ -36,6 +37,7 @@ require (
 	github.com/tendermint/go-amino v0.16.0
 	github.com/tendermint/tendermint v0.34.19
 	github.com/tendermint/tm-db v0.6.7
+	github.com/yahoo/coname v0.0.0-20170609175141-84592ddf8673 // indirect
 	golang.org/x/crypto v0.10.0
 	golang.org/x/net v0.11.0
 	gonum.org/v1/gonum v0.13.0
@@ -44,6 +46,7 @@ require (
 )
 
 require (
+	github.com/Finschia/vrf v0.0.0-20180716233122-192de52975eb
 	github.com/bufbuild/buf v1.21.0
 	github.com/golangci/golangci-lint v1.53.3
 	github.com/oasisprotocol/curve25519-voi v0.0.0-20230110094441-db37f07504ce
@@ -55,6 +58,7 @@ require (
 require (
 	4d63.com/gocheckcompilerdirectives v1.2.1 // indirect
 	4d63.com/gochecknoglobals v0.2.1 // indirect
+	filippo.io/edwards25519 v1.0.0 // indirect
 	github.com/4meepo/tagalign v1.2.2 // indirect
 	github.com/Abirdcfly/dupword v0.0.11 // indirect
 	github.com/Antonboom/errname v0.1.10 // indirect
@@ -213,6 +217,7 @@ require (
 	github.com/quasilyte/gogrep v0.5.0 // indirect
 	github.com/quasilyte/regex/syntax v0.0.0-20210819130434-b3f0c404a727 // indirect
 	github.com/quasilyte/stdinfo v0.0.0-20220114132959-f7386bf02567 // indirect
+	github.com/r2ishiguro/vrf v0.0.0-20180716233122-192de52975eb // indirect
 	github.com/russross/blackfriday/v2 v2.1.0 // indirect
 	github.com/ryancurrah/gomodguard v1.3.0 // indirect
 	github.com/ryanrolds/sqlclosecheck v0.4.0 // indirect
